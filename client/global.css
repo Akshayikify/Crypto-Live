@@ -115,10 +115,6 @@
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
   html {
     scroll-behavior: smooth;
   }
@@ -137,7 +133,9 @@
     overflow-x: auto;
     white-space: pre;
   }
+}
 
+@layer components {
   /* Glassmorphic container styles */
   .glass {
     @apply bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-2xl;
@@ -151,7 +149,9 @@
   .transition-smooth {
     @apply transition-all duration-300 ease-out;
   }
+}
 
+@layer utilities {
   /* Scrollbar styling */
   ::-webkit-scrollbar {
     width: 8px;
