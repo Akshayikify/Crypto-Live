@@ -1,13 +1,18 @@
 import { ArrowRight, TrendingUp } from "lucide-react";
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
+    // Mouse movement effect
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
@@ -18,6 +23,28 @@ const HeroSection = () => {
     };
 
     window.addEventListener("mousemove", handleMouseMove);
+
+    // GSAP Intro Animations
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+      titleRef.current,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+    )
+      .fromTo(
+        textRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        "-=0.6"
+      )
+      .fromTo(
+        buttonsRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+        "-=0.6"
+      );
+
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
@@ -51,7 +78,10 @@ const HeroSection = () => {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-in fade-in slide-in-from-bottom-4">
+          <h1
+            ref={titleRef}
+            className="text-5xl md:text-7xl font-bold mb-6"
+          >
             <span className="bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 bg-clip-text text-transparent">
               Track. Analyze.
             </span>
@@ -61,8 +91,8 @@ const HeroSection = () => {
 
           {/* Subheading */}
           <p
-            className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4"
-            style={{ animationDelay: "100ms" }}
+            ref={textRef}
+            className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
           >
             Monitor real-time cryptocurrency prices, advanced analytics, and
             market insights all in one beautifully designed platform.
@@ -70,8 +100,8 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-4"
-            style={{ animationDelay: "200ms" }}
+            ref={buttonsRef}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <button className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 active:scale-95">
               <span className="flex items-center gap-2">

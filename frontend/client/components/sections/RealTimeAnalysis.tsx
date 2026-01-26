@@ -92,11 +92,11 @@ const RealTimeAnalysis = () => {
   return (
     <section ref={containerRef} className="container mx-auto px-4 py-20">
       {/* Section Header */}
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center justify-center gap-3 mb-4">
         <Activity className="text-blue-500" size={24} />
         <h2 className="text-3xl md:text-4xl font-bold">Real-Time Analysis</h2>
       </div>
-      <p className="text-muted-foreground mb-12 max-w-2xl">
+      <p className="text-muted-foreground mb-12 max-w-2xl mx-auto text-center">
         Stay informed with real-time market metrics and advanced analysis tools
         updated 24/7.
       </p>
@@ -134,9 +134,8 @@ const RealTimeAnalysis = () => {
               {/* Change Indicator */}
               <div className="flex items-center gap-1 mb-4">
                 <span
-                  className={`text-sm font-semibold ${
-                    metric.change >= 0 ? "text-green-500" : "text-red-500"
-                  }`}
+                  className={`text-sm font-semibold ${metric.change >= 0 ? "text-green-500" : "text-red-500"
+                    }`}
                 >
                   {metric.change >= 0 ? "+" : ""}
                   {metric.change}%
@@ -152,10 +151,7 @@ const RealTimeAnalysis = () => {
               </p>
             </div>
 
-            {/* Hover Glow */}
-            <div
-              className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none bg-gradient-to-br ${metric.color} blur-xl -z-10`}
-            ></div>
+
           </div>
         ))}
       </div>

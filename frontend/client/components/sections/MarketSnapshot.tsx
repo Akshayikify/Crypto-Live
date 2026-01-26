@@ -130,11 +130,11 @@ const MarketSnapshot = () => {
   return (
     <section ref={containerRef} className="container mx-auto px-4 py-20">
       {/* Section Header */}
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center justify-center gap-3 mb-4">
         <TrendingUp className="text-blue-500" size={24} />
         <h2 className="text-3xl md:text-4xl font-bold">Market Snapshot</h2>
       </div>
-      <p className="text-muted-foreground mb-12 max-w-2xl">
+      <p className="text-muted-foreground mb-12 max-w-2xl mx-auto text-center">
         Top cryptocurrencies at a glance. Track real-time prices and 24-hour
         changes.
       </p>

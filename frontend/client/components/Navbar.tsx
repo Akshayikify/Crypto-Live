@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Moon, Sun, Monitor, Menu, X, User } from "lucide-react";
+import { Moon, Sun, Monitor, Menu, X } from "lucide-react";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 import { useTheme } from "@/context/ThemeContext";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const { theme, setTheme, isDark } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -92,15 +98,16 @@ const Navbar = () => {
             </div>
 
             {/* Auth Button */}
-            <button
-              onClick={() => setIsAuthenticated(!isAuthenticated)}
-              className="flex items-center gap-2 glass-sm px-4 py-2 hover:bg-white/20 dark:hover:bg-black/30 transition-smooth"
-            >
-              <User size={18} />
-              <span className="hidden sm:inline text-sm font-medium">
-                {isAuthenticated ? "Profile" : "Login"}
-              </span>
-            </button>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <button className="flex items-center gap-2 glass-sm px-4 py-2 hover:bg-white/20 dark:hover:bg-black/30 transition-smooth">
+                  <span className="text-sm font-medium">Login</span>
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
 
             {/* Mobile Menu Button */}
             <button

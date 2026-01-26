@@ -109,11 +109,11 @@ const PopularCoinsSlider = () => {
     <section className="py-20 overflow-hidden bg-gradient-to-b from-transparent to-blue-500/5 dark:to-blue-500/10">
       <div className="container mx-auto px-4 mb-12">
         {/* Section Header */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center justify-center gap-3 mb-4">
           <TrendingUp className="text-blue-500" size={24} />
           <h2 className="text-3xl md:text-4xl font-bold">Popular Coins</h2>
         </div>
-        <p className="text-muted-foreground max-w-2xl">
+        <p className="text-muted-foreground max-w-2xl mx-auto text-center">
           Scroll through the most popular cryptocurrencies in real-time.
         </p>
       </div>
@@ -168,11 +168,10 @@ const PopularCoinsSlider = () => {
                     ${coin.price.toLocaleString()}
                   </p>
                   <div
-                    className={`inline-flex items-center px-3 py-1 rounded-lg text-sm font-semibold ${
-                      coin.change24h >= 0
-                        ? "bg-green-500/20 text-green-600 dark:text-green-400"
-                        : "bg-red-500/20 text-red-600 dark:text-red-400"
-                    }`}
+                    className={`inline-flex items-center px-3 py-1 rounded-lg text-sm font-semibold ${coin.change24h >= 0
+                      ? "bg-green-500/20 text-green-600 dark:text-green-400"
+                      : "bg-red-500/20 text-red-600 dark:text-red-400"
+                      }`}
                   >
                     {coin.change24h >= 0 ? "+" : ""}
                     {coin.change24h}%
@@ -180,10 +179,7 @@ const PopularCoinsSlider = () => {
                 </div>
               </div>
 
-              {/* Hover Glow */}
-              <div
-                className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-br ${coin.color} blur-xl -z-10`}
-              ></div>
+
             </div>
           ))}
         </div>

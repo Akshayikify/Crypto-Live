@@ -185,11 +185,11 @@ const MarketDataTable = () => {
   return (
     <section className="container mx-auto px-4 py-20">
       {/* Section Header */}
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center justify-center gap-3 mb-4">
         <TrendingUp className="text-blue-500" size={24} />
         <h2 className="text-3xl md:text-4xl font-bold">Market Data</h2>
       </div>
-      <p className="text-muted-foreground mb-8 max-w-2xl">
+      <p className="text-muted-foreground mb-8 max-w-2xl mx-auto text-center">
         Browse detailed cryptocurrency market data. Click column headers to
         sort.
       </p>
@@ -261,25 +261,22 @@ const MarketDataTable = () => {
                     {formatPrice(coin.price)}
                   </td>
                   <td
-                    className={`px-6 py-4 text-right font-semibold ${
-                      coin.change1h >= 0 ? "text-green-500" : "text-red-500"
-                    }`}
+                    className={`px-6 py-4 text-right font-semibold ${coin.change1h >= 0 ? "text-green-500" : "text-red-500"
+                      }`}
                   >
                     {coin.change1h >= 0 ? "+" : ""}
                     {formatNumber(coin.change1h, 2)}%
                   </td>
                   <td
-                    className={`px-6 py-4 text-right font-semibold ${
-                      coin.change24h >= 0 ? "text-green-500" : "text-red-500"
-                    }`}
+                    className={`px-6 py-4 text-right font-semibold ${coin.change24h >= 0 ? "text-green-500" : "text-red-500"
+                      }`}
                   >
                     {coin.change24h >= 0 ? "+" : ""}
                     {formatNumber(coin.change24h, 2)}%
                   </td>
                   <td
-                    className={`px-6 py-4 text-right font-semibold ${
-                      coin.change7d >= 0 ? "text-green-500" : "text-red-500"
-                    }`}
+                    className={`px-6 py-4 text-right font-semibold ${coin.change7d >= 0 ? "text-green-500" : "text-red-500"
+                      }`}
                   >
                     {coin.change7d >= 0 ? "+" : ""}
                     {formatNumber(coin.change7d, 2)}%
