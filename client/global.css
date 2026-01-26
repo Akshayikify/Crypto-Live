@@ -57,6 +57,14 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Crypto Colors */
+    --crypto-gain: 142.7 71.5% 45.3%;
+    --crypto-loss: 0 84.2% 60.2%;
+    --crypto-neutral: 217.2 32.6% 17.5%;
+    --crypto-accent: 219.4 100% 56.3%;
+    --crypto-glass-light: 0 0% 100%;
+    --crypto-glass-dark: 222.2 84% 4.9%;
   }
 
   .dark {
