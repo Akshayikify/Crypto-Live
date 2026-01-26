@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
-import { ArrowUpRight, ArrowDownRight, TrendingUp } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from "react";
+import { ArrowUpRight, ArrowDownRight, TrendingUp } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,44 +18,44 @@ interface Coin {
 
 const sampleCoins: Coin[] = [
   {
-    id: '1',
-    name: 'Bitcoin',
-    symbol: 'BTC',
+    id: "1",
+    name: "Bitcoin",
+    symbol: "BTC",
     price: 42856,
     change24h: 2.34,
     change7d: 5.12,
     marketCap: 840000000000,
-    icon: '₿',
+    icon: "₿",
   },
   {
-    id: '2',
-    name: 'Ethereum',
-    symbol: 'ETH',
+    id: "2",
+    name: "Ethereum",
+    symbol: "ETH",
     price: 2341,
     change24h: -1.23,
     change7d: -2.45,
     marketCap: 281000000000,
-    icon: 'Ξ',
+    icon: "Ξ",
   },
   {
-    id: '3',
-    name: 'Solana',
-    symbol: 'SOL',
+    id: "3",
+    name: "Solana",
+    symbol: "SOL",
     price: 139.45,
     change24h: 3.67,
-    change7d: 8.90,
+    change7d: 8.9,
     marketCap: 61000000000,
-    icon: '◎',
+    icon: "◎",
   },
   {
-    id: '4',
-    name: 'Cardano',
-    symbol: 'ADA',
+    id: "4",
+    name: "Cardano",
+    symbol: "ADA",
     price: 0.98,
     change24h: -0.56,
     change7d: 1.23,
     marketCap: 36000000000,
-    icon: '₳',
+    icon: "₳",
   },
 ];
 
@@ -81,33 +81,33 @@ const MarketSnapshot = () => {
           y: 0,
           duration: 0.8,
           delay: index * 0.1,
-          ease: 'cubic.out',
+          ease: "cubic.out",
           scrollTrigger: {
             trigger: card,
-            start: 'top 80%',
-            end: 'top 50%',
+            start: "top 80%",
+            end: "top 50%",
             scrub: 1,
             markers: false,
           },
-        }
+        },
       );
 
       // Hover animation
-      card.addEventListener('mouseenter', () => {
+      card.addEventListener("mouseenter", () => {
         gsap.to(card, {
           scale: 1.05,
-          boxShadow: '0 20px 40px rgba(59, 130, 246, 0.3)',
+          boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)",
           duration: 0.3,
-          overwrite: 'auto',
+          overwrite: "auto",
         });
       });
 
-      card.addEventListener('mouseleave', () => {
+      card.addEventListener("mouseleave", () => {
         gsap.to(card, {
           scale: 1,
-          boxShadow: 'none',
+          boxShadow: "none",
           duration: 0.3,
-          overwrite: 'auto',
+          overwrite: "auto",
         });
       });
     });
@@ -135,7 +135,8 @@ const MarketSnapshot = () => {
         <h2 className="text-3xl md:text-4xl font-bold">Market Snapshot</h2>
       </div>
       <p className="text-muted-foreground mb-12 max-w-2xl">
-        Top cryptocurrencies at a glance. Track real-time prices and 24-hour changes.
+        Top cryptocurrencies at a glance. Track real-time prices and 24-hour
+        changes.
       </p>
 
       {/* Cards Grid */}
@@ -159,23 +160,37 @@ const MarketSnapshot = () => {
                   <p className="text-sm text-muted-foreground">{coin.symbol}</p>
                 </div>
               </div>
-              <div className={cn(
-                'text-sm font-semibold px-2 py-1 rounded-lg',
-                coin.change24h >= 0
-                  ? 'bg-green-500/20 text-green-600 dark:text-green-400'
-                  : 'bg-red-500/20 text-red-600 dark:text-red-400'
-              )}>
-                {coin.change24h >= 0 ? '+' : ''}{coin.change24h}%
+              <div
+                className={cn(
+                  "text-sm font-semibold px-2 py-1 rounded-lg",
+                  coin.change24h >= 0
+                    ? "bg-green-500/20 text-green-600 dark:text-green-400"
+                    : "bg-red-500/20 text-red-600 dark:text-red-400",
+                )}
+              >
+                {coin.change24h >= 0 ? "+" : ""}
+                {coin.change24h}%
               </div>
             </div>
 
             {/* Price */}
             <div className="mb-4">
-              <p className="text-2xl font-bold mb-2">${coin.price.toLocaleString()}</p>
+              <p className="text-2xl font-bold mb-2">
+                ${coin.price.toLocaleString()}
+              </p>
               <div className="flex items-center gap-4 text-sm">
-                <span className={coin.change7d >= 0 ? 'text-green-500' : 'text-red-500'}>
-                  {coin.change7d >= 0 ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
-                  7d: {coin.change7d >= 0 ? '+' : ''}{coin.change7d}%
+                <span
+                  className={
+                    coin.change7d >= 0 ? "text-green-500" : "text-red-500"
+                  }
+                >
+                  {coin.change7d >= 0 ? (
+                    <ArrowUpRight size={16} />
+                  ) : (
+                    <ArrowDownRight size={16} />
+                  )}
+                  7d: {coin.change7d >= 0 ? "+" : ""}
+                  {coin.change7d}%
                 </span>
               </div>
             </div>
@@ -183,7 +198,9 @@ const MarketSnapshot = () => {
             {/* Market Cap */}
             <div className="pt-4 border-t border-white/10 dark:border-white/5">
               <p className="text-xs text-muted-foreground mb-1">Market Cap</p>
-              <p className="font-semibold text-sm">{formatCurrency(coin.marketCap)}</p>
+              <p className="font-semibold text-sm">
+                {formatCurrency(coin.marketCap)}
+              </p>
             </div>
           </div>
         ))}
@@ -194,7 +211,7 @@ const MarketSnapshot = () => {
 
 // Helper function for className merging
 function cn(...classes: (string | undefined | boolean)[]) {
-  return classes.filter(Boolean).join(' ');
+  return classes.filter(Boolean).join(" ");
 }
 
 export default MarketSnapshot;

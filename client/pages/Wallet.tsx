@@ -1,5 +1,5 @@
-import { ArrowRight, Lock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowRight, Lock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Wallet = () => {
   return (
@@ -28,7 +28,8 @@ const Wallet = () => {
             <li>• Wallet connection integration</li>
           </ul>
           <p className="text-sm text-muted-foreground">
-            Note: This page requires authentication. Continue prompting to implement!
+            Note: This page requires authentication. Continue prompting to
+            implement!
           </p>
         </div>
 

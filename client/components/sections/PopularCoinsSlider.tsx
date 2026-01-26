@@ -1,6 +1,6 @@
-import { useRef, useEffect } from 'react';
-import { TrendingUp } from 'lucide-react';
-import gsap from 'gsap';
+import { useRef, useEffect } from "react";
+import { TrendingUp } from "lucide-react";
+import gsap from "gsap";
 
 interface CoinSlide {
   id: string;
@@ -14,58 +14,58 @@ interface CoinSlide {
 
 const coins: CoinSlide[] = [
   {
-    id: '1',
-    name: 'Bitcoin',
-    symbol: 'BTC',
+    id: "1",
+    name: "Bitcoin",
+    symbol: "BTC",
     price: 42856,
     change24h: 2.34,
-    icon: '₿',
-    color: 'from-orange-500 to-yellow-500',
+    icon: "₿",
+    color: "from-orange-500 to-yellow-500",
   },
   {
-    id: '2',
-    name: 'Ethereum',
-    symbol: 'ETH',
+    id: "2",
+    name: "Ethereum",
+    symbol: "ETH",
     price: 2341,
     change24h: -1.23,
-    icon: 'Ξ',
-    color: 'from-purple-500 to-pink-500',
+    icon: "Ξ",
+    color: "from-purple-500 to-pink-500",
   },
   {
-    id: '3',
-    name: 'Solana',
-    symbol: 'SOL',
+    id: "3",
+    name: "Solana",
+    symbol: "SOL",
     price: 139.45,
     change24h: 3.67,
-    icon: '◎',
-    color: 'from-green-500 to-emerald-500',
+    icon: "◎",
+    color: "from-green-500 to-emerald-500",
   },
   {
-    id: '4',
-    name: 'Cardano',
-    symbol: 'ADA',
+    id: "4",
+    name: "Cardano",
+    symbol: "ADA",
     price: 0.98,
     change24h: -0.56,
-    icon: '₳',
-    color: 'from-blue-500 to-cyan-500',
+    icon: "₳",
+    color: "from-blue-500 to-cyan-500",
   },
   {
-    id: '5',
-    name: 'Ripple',
-    symbol: 'XRP',
+    id: "5",
+    name: "Ripple",
+    symbol: "XRP",
     price: 2.45,
     change24h: 1.89,
-    icon: '⚡',
-    color: 'from-indigo-500 to-purple-500',
+    icon: "⚡",
+    color: "from-indigo-500 to-purple-500",
   },
   {
-    id: '6',
-    name: 'Polkadot',
-    symbol: 'DOT',
+    id: "6",
+    name: "Polkadot",
+    symbol: "DOT",
     price: 8.67,
     change24h: -2.34,
-    icon: '◉',
-    color: 'from-red-500 to-pink-500',
+    icon: "◉",
+    color: "from-red-500 to-pink-500",
   },
 ];
 
@@ -85,7 +85,7 @@ const PopularCoinsSlider = () => {
     tl.to(slider, {
       x: -slider.offsetWidth / 3,
       duration: 30,
-      ease: 'none',
+      ease: "none",
     });
 
     return () => {
@@ -133,7 +133,7 @@ const PopularCoinsSlider = () => {
         <div
           ref={sliderRef}
           className="flex gap-6 pb-4"
-          style={{ width: 'fit-content' }}
+          style={{ width: "fit-content" }}
         >
           {[...coins, ...coins, ...coins].map((coin, index) => (
             <div
@@ -141,36 +141,49 @@ const PopularCoinsSlider = () => {
               className="flex-shrink-0 w-72 glass-sm p-6 rounded-2xl group cursor-pointer hover:scale-105 transition-transform duration-300"
             >
               {/* Gradient Background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${coin.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}></div>
+              <div
+                className={`absolute inset-0 bg-gradient-to-br ${coin.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}
+              ></div>
 
               {/* Content */}
               <div className="relative z-10">
                 {/* Icon and Name */}
                 <div className="flex items-center gap-4 mb-4">
-                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${coin.color} flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/20`}>
+                  <div
+                    className={`w-16 h-16 rounded-xl bg-gradient-to-br ${coin.color} flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-blue-500/20`}
+                  >
                     {coin.icon}
                   </div>
                   <div>
                     <p className="font-semibold text-lg">{coin.name}</p>
-                    <p className="text-sm text-muted-foreground">{coin.symbol}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {coin.symbol}
+                    </p>
                   </div>
                 </div>
 
                 {/* Price and Change */}
                 <div className="space-y-2">
-                  <p className="text-2xl font-bold">${coin.price.toLocaleString()}</p>
-                  <div className={`inline-flex items-center px-3 py-1 rounded-lg text-sm font-semibold ${
-                    coin.change24h >= 0
-                      ? 'bg-green-500/20 text-green-600 dark:text-green-400'
-                      : 'bg-red-500/20 text-red-600 dark:text-red-400'
-                  }`}>
-                    {coin.change24h >= 0 ? '+' : ''}{coin.change24h}%
+                  <p className="text-2xl font-bold">
+                    ${coin.price.toLocaleString()}
+                  </p>
+                  <div
+                    className={`inline-flex items-center px-3 py-1 rounded-lg text-sm font-semibold ${
+                      coin.change24h >= 0
+                        ? "bg-green-500/20 text-green-600 dark:text-green-400"
+                        : "bg-red-500/20 text-red-600 dark:text-red-400"
+                    }`}
+                  >
+                    {coin.change24h >= 0 ? "+" : ""}
+                    {coin.change24h}%
                   </div>
                 </div>
               </div>
 
               {/* Hover Glow */}
-              <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-br ${coin.color} blur-xl -z-10`}></div>
+              <div
+                className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-br ${coin.color} blur-xl -z-10`}
+              ></div>
             </div>
           ))}
         </div>

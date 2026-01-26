@@ -80,7 +80,7 @@ export default {
             height: "0",
           },
         },
-        "float": {
+        float: {
           "0%, 100%": {
             transform: "translateY(0px)",
           },
@@ -88,7 +88,7 @@ export default {
             transform: "translateY(-20px)",
           },
         },
-        "glow": {
+        glow: {
           "0%, 100%": {
             boxShadow: "0 0 20px rgba(59, 130, 246, 0.3)",
           },
@@ -112,7 +112,7 @@ export default {
             transform: "scale(1.05)",
           },
         },
-        "shimmer": {
+        shimmer: {
           "0%": {
             backgroundPosition: "-1000px 0",
           },
@@ -124,22 +124,23 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "float": "float 3s ease-in-out infinite",
-        "glow": "glow 2s ease-in-out infinite",
+        float: "float 3s ease-in-out infinite",
+        glow: "glow 2s ease-in-out infinite",
         "slide-left": "slide-left 20s linear infinite",
         "pulse-scale": "pulse-scale 2s ease-in-out infinite",
-        "shimmer": "shimmer 2s infinite",
+        shimmer: "shimmer 2s infinite",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic":
+          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
         crypto: {
-          "gain": "hsl(var(--crypto-gain))",
-          "loss": "hsl(var(--crypto-loss))",
-          "neutral": "hsl(var(--crypto-neutral))",
-          "accent": "hsl(var(--crypto-accent))",
+          gain: "hsl(var(--crypto-gain))",
+          loss: "hsl(var(--crypto-loss))",
+          neutral: "hsl(var(--crypto-neutral))",
+          accent: "hsl(var(--crypto-accent))",
           "glass-light": "hsl(var(--crypto-glass-light))",
           "glass-dark": "hsl(var(--crypto-glass-dark))",
         },

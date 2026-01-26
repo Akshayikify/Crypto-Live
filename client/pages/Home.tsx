@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
-import HeroSection from '@/components/sections/HeroSection';
-import MarketSnapshot from '@/components/sections/MarketSnapshot';
-import PopularCoinsSlider from '@/components/sections/PopularCoinsSlider';
-import MarketDataTable from '@/components/sections/MarketDataTable';
-import RealTimeAnalysis from '@/components/sections/RealTimeAnalysis';
-import EducationalSection from '@/components/sections/EducationalSection';
+import { useEffect } from "react";
+import HeroSection from "@/components/sections/HeroSection";
+import MarketSnapshot from "@/components/sections/MarketSnapshot";
+import PopularCoinsSlider from "@/components/sections/PopularCoinsSlider";
+import MarketDataTable from "@/components/sections/MarketDataTable";
+import RealTimeAnalysis from "@/components/sections/RealTimeAnalysis";
+import EducationalSection from "@/components/sections/EducationalSection";
 
 const Home = () => {
   useEffect(() => {
     // Smooth scroll behavior
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   return (

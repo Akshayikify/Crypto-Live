@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
-import { TrendingUp, TrendingDown, Activity } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from "react";
+import { TrendingUp, TrendingDown, Activity } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,36 +20,36 @@ const RealTimeAnalysis = () => {
 
   const metrics: AnalysisMetric[] = [
     {
-      title: 'Market Dominance',
-      value: '42.3%',
+      title: "Market Dominance",
+      value: "42.3%",
       change: 1.2,
       icon: <TrendingUp size={24} />,
-      color: 'from-blue-500 to-cyan-500',
-      description: 'Bitcoin dominance in total market cap',
+      color: "from-blue-500 to-cyan-500",
+      description: "Bitcoin dominance in total market cap",
     },
     {
-      title: 'Volatility Index',
-      value: '68.4',
+      title: "Volatility Index",
+      value: "68.4",
       change: -2.5,
       icon: <Activity size={24} />,
-      color: 'from-purple-500 to-pink-500',
-      description: 'Overall market volatility level',
+      color: "from-purple-500 to-pink-500",
+      description: "Overall market volatility level",
     },
     {
-      title: 'Fear & Greed Index',
-      value: '45',
+      title: "Fear & Greed Index",
+      value: "45",
       change: 3.1,
       icon: <TrendingUp size={24} />,
-      color: 'from-orange-500 to-yellow-500',
-      description: 'Market sentiment indicator',
+      color: "from-orange-500 to-yellow-500",
+      description: "Market sentiment indicator",
     },
     {
-      title: '24h Trading Volume',
-      value: '$1.2T',
+      title: "24h Trading Volume",
+      value: "$1.2T",
       change: 5.8,
       icon: <TrendingDown size={24} />,
-      color: 'from-green-500 to-emerald-500',
-      description: 'Total market trading volume',
+      color: "from-green-500 to-emerald-500",
+      description: "Total market trading volume",
     },
   ];
 
@@ -73,14 +73,14 @@ const RealTimeAnalysis = () => {
           rotateX: 0,
           duration: 0.8,
           delay: index * 0.15,
-          ease: 'back.out',
+          ease: "back.out",
           scrollTrigger: {
             trigger: card,
-            start: 'top 80%',
+            start: "top 80%",
             markers: false,
           },
           perspective: 1200,
-        }
+        },
       );
     });
 
@@ -97,7 +97,8 @@ const RealTimeAnalysis = () => {
         <h2 className="text-3xl md:text-4xl font-bold">Real-Time Analysis</h2>
       </div>
       <p className="text-muted-foreground mb-12 max-w-2xl">
-        Stay informed with real-time market metrics and advanced analysis tools updated 24/7.
+        Stay informed with real-time market metrics and advanced analysis tools
+        updated 24/7.
       </p>
 
       {/* Metrics Grid */}
@@ -109,29 +110,40 @@ const RealTimeAnalysis = () => {
               metricsRef.current[index] = el;
             }}
             className="glass p-6 rounded-2xl relative overflow-hidden group"
-            style={{ perspective: '1200px' }}
+            style={{ perspective: "1200px" }}
           >
             {/* Background Gradient */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${metric.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
+            <div
+              className={`absolute inset-0 bg-gradient-to-br ${metric.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}
+            ></div>
 
             {/* Icon */}
-            <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${metric.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}>
+            <div
+              className={`w-12 h-12 rounded-lg bg-gradient-to-br ${metric.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}
+            >
               {metric.icon}
             </div>
 
             {/* Content */}
             <div className="relative z-10">
-              <p className="text-sm text-muted-foreground mb-2">{metric.title}</p>
+              <p className="text-sm text-muted-foreground mb-2">
+                {metric.title}
+              </p>
               <p className="text-3xl font-bold mb-2">{metric.value}</p>
 
               {/* Change Indicator */}
               <div className="flex items-center gap-1 mb-4">
-                <span className={`text-sm font-semibold ${
-                  metric.change >= 0 ? 'text-green-500' : 'text-red-500'
-                }`}>
-                  {metric.change >= 0 ? '+' : ''}{metric.change}%
+                <span
+                  className={`text-sm font-semibold ${
+                    metric.change >= 0 ? "text-green-500" : "text-red-500"
+                  }`}
+                >
+                  {metric.change >= 0 ? "+" : ""}
+                  {metric.change}%
                 </span>
-                <span className="text-xs text-muted-foreground">24h change</span>
+                <span className="text-xs text-muted-foreground">
+                  24h change
+                </span>
               </div>
 
               {/* Description */}
@@ -141,7 +153,9 @@ const RealTimeAnalysis = () => {
             </div>
 
             {/* Hover Glow */}
-            <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none bg-gradient-to-br ${metric.color} blur-xl -z-10`}></div>
+            <div
+              className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none bg-gradient-to-br ${metric.color} blur-xl -z-10`}
+            ></div>
           </div>
         ))}
       </div>
@@ -154,7 +168,7 @@ const RealTimeAnalysis = () => {
             <p className="text-sm text-muted-foreground mt-1">Last 24 hours</p>
           </div>
           <div className="flex gap-2">
-            {['1H', '24H', '7D', '30D'].map((period) => (
+            {["1H", "24H", "7D", "30D"].map((period) => (
               <button
                 key={period}
                 className="px-4 py-2 rounded-lg hover:bg-white/10 dark:hover:bg-black/20 transition-colors text-sm font-medium"
@@ -168,7 +182,9 @@ const RealTimeAnalysis = () => {
         {/* Placeholder Chart */}
         <div className="h-64 flex items-center justify-center rounded-lg bg-white/5 dark:bg-black/10 border border-white/10 dark:border-white/5">
           <div className="text-center">
-            <div className="text-muted-foreground mb-2">Chart Data Visualization</div>
+            <div className="text-muted-foreground mb-2">
+              Chart Data Visualization
+            </div>
             <div className="text-sm text-muted-foreground">
               Interactive chart will display market trends here
             </div>

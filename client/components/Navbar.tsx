@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Moon, Sun, Monitor, Menu, X, User } from 'lucide-react';
-import { useTheme } from '@/context/ThemeContext';
-import { cn } from '@/lib/utils';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Moon, Sun, Monitor, Menu, X, User } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const { theme, setTheme, isDark } = useTheme();
@@ -10,10 +10,10 @@ const Navbar = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Market', href: '/market' },
-    { label: 'Wallet', href: '/wallet' },
-    { label: 'About', href: '/about' },
+    { label: "Home", href: "/" },
+    { label: "Market", href: "/market" },
+    { label: "Wallet", href: "/wallet" },
+    { label: "About", href: "/about" },
   ];
 
   return (
@@ -21,7 +21,10 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo and Brand */}
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-smooth">
+          <Link
+            to="/"
+            className="flex items-center gap-2 hover:opacity-80 transition-smooth"
+          >
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
               <span className="text-white font-bold text-lg">₿</span>
             </div>
@@ -48,34 +51,43 @@ const Navbar = () => {
             {/* Theme Toggle */}
             <div className="flex items-center gap-1 glass-sm p-1">
               <button
-                onClick={() => setTheme('light')}
+                onClick={() => setTheme("light")}
                 className={cn(
-                  'p-1.5 rounded-lg transition-smooth',
-                  theme === 'light' ? 'bg-white/20 dark:bg-black/30' : 'hover:bg-white/10'
+                  "p-1.5 rounded-lg transition-smooth",
+                  theme === "light"
+                    ? "bg-white/20 dark:bg-black/30"
+                    : "hover:bg-white/10",
                 )}
                 title="Light theme"
               >
                 <Sun size={18} className="text-yellow-500" />
               </button>
               <button
-                onClick={() => setTheme('dark')}
+                onClick={() => setTheme("dark")}
                 className={cn(
-                  'p-1.5 rounded-lg transition-smooth',
-                  theme === 'dark' ? 'bg-white/20 dark:bg-black/30' : 'hover:bg-white/10'
+                  "p-1.5 rounded-lg transition-smooth",
+                  theme === "dark"
+                    ? "bg-white/20 dark:bg-black/30"
+                    : "hover:bg-white/10",
                 )}
                 title="Dark theme"
               >
                 <Moon size={18} className="text-slate-400" />
               </button>
               <button
-                onClick={() => setTheme('system')}
+                onClick={() => setTheme("system")}
                 className={cn(
-                  'p-1.5 rounded-lg transition-smooth',
-                  theme === 'system' ? 'bg-white/20 dark:bg-black/30' : 'hover:bg-white/10'
+                  "p-1.5 rounded-lg transition-smooth",
+                  theme === "system"
+                    ? "bg-white/20 dark:bg-black/30"
+                    : "hover:bg-white/10",
                 )}
                 title="System theme"
               >
-                <Monitor size={18} className="text-gray-600 dark:text-gray-400" />
+                <Monitor
+                  size={18}
+                  className="text-gray-600 dark:text-gray-400"
+                />
               </button>
             </div>
 
@@ -86,7 +98,7 @@ const Navbar = () => {
             >
               <User size={18} />
               <span className="hidden sm:inline text-sm font-medium">
-                {isAuthenticated ? 'Profile' : 'Login'}
+                {isAuthenticated ? "Profile" : "Login"}
               </span>
             </button>
 

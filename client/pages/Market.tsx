@@ -1,5 +1,5 @@
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Market = () => {
   return (
@@ -10,14 +10,13 @@ const Market = () => {
             Market
           </div>
           <p className="text-xl text-muted-foreground">
-            Advanced market analysis, filtering, and detailed cryptocurrency information.
+            Advanced market analysis, filtering, and detailed cryptocurrency
+            information.
           </p>
         </div>
 
         <div className="glass p-8 rounded-2xl mb-8">
-          <p className="text-muted-foreground mb-6">
-            This page will include:
-          </p>
+          <p className="text-muted-foreground mb-6">This page will include:</p>
           <ul className="text-left space-y-3 text-muted-foreground mb-6">
             <li>• Advanced filtering (top gainers, losers, volume spikes)</li>
             <li>• Detailed coin information and charts</li>

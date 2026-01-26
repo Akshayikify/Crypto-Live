@@ -1,4 +1,4 @@
-import { Zap, Shield, Gauge, MessageSquare } from 'lucide-react';
+import { Zap, Shield, Gauge, MessageSquare } from "lucide-react";
 
 interface Feature {
   title: string;
@@ -10,28 +10,32 @@ interface Feature {
 const EducationalSection = () => {
   const features: Feature[] = [
     {
-      title: 'Real-time Accuracy',
-      description: 'Get live crypto prices updated every second with precision data from top exchanges.',
+      title: "Real-time Accuracy",
+      description:
+        "Get live crypto prices updated every second with precision data from top exchanges.",
       icon: <Zap size={24} />,
-      color: 'from-yellow-500 to-orange-500',
+      color: "from-yellow-500 to-orange-500",
     },
     {
-      title: 'Secure & Fast',
-      description: 'Bank-level security with blazing-fast load times and 99.9% uptime guarantee.',
+      title: "Secure & Fast",
+      description:
+        "Bank-level security with blazing-fast load times and 99.9% uptime guarantee.",
       icon: <Shield size={24} />,
-      color: 'from-green-500 to-emerald-500',
+      color: "from-green-500 to-emerald-500",
     },
     {
-      title: 'Advanced Analytics',
-      description: 'Technical analysis tools, charts, and indicators to make informed investment decisions.',
+      title: "Advanced Analytics",
+      description:
+        "Technical analysis tools, charts, and indicators to make informed investment decisions.",
       icon: <Gauge size={24} />,
-      color: 'from-blue-500 to-cyan-500',
+      color: "from-blue-500 to-cyan-500",
     },
     {
-      title: 'Smart Alerts',
-      description: 'Customizable notifications for price movements, portfolio changes, and market events.',
+      title: "Smart Alerts",
+      description:
+        "Customizable notifications for price movements, portfolio changes, and market events.",
       icon: <MessageSquare size={24} />,
-      color: 'from-purple-500 to-pink-500',
+      color: "from-purple-500 to-pink-500",
     },
   ];
 
@@ -41,24 +45,28 @@ const EducationalSection = () => {
       <div className="text-center mb-16 max-w-3xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">Why CryptoLive?</h2>
         <p className="text-lg text-muted-foreground">
-          Everything you need to track, analyze, and invest smarter in the world of cryptocurrency.
+          Everything you need to track, analyze, and invest smarter in the world
+          of cryptocurrency.
         </p>
       </div>
 
       {/* Features Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         {features.map((feature) => (
-          <div key={feature.title} className="glass p-8 rounded-2xl group hover:border-blue-500/50 transition-colors">
+          <div
+            key={feature.title}
+            className="glass p-8 rounded-2xl group hover:border-blue-500/50 transition-colors"
+          >
             {/* Icon */}
-            <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}>
+            <div
+              className={`w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform duration-300`}
+            >
               {feature.icon}
             </div>
 
             {/* Content */}
             <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-            <p className="text-muted-foreground">
-              {feature.description}
-            </p>
+            <p className="text-muted-foreground">{feature.description}</p>
           </div>
         ))}
       </div>
@@ -68,19 +76,19 @@ const EducationalSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
-              number: '2000+',
-              label: 'Cryptocurrencies Tracked',
-              details: 'From Bitcoin to the latest altcoins'
+              number: "2000+",
+              label: "Cryptocurrencies Tracked",
+              details: "From Bitcoin to the latest altcoins",
             },
             {
-              number: '100M+',
-              label: 'Active Users',
-              details: 'Traders, investors, and enthusiasts'
+              number: "100M+",
+              label: "Active Users",
+              details: "Traders, investors, and enthusiasts",
             },
             {
-              number: '24/7',
-              label: 'Live Updates',
-              details: 'Real-time data, zero delays'
+              number: "24/7",
+              label: "Live Updates",
+              details: "Real-time data, zero delays",
             },
           ].map((stat) => (
             <div key={stat.number} className="text-center">
@@ -96,8 +104,12 @@ const EducationalSection = () => {
 
       {/* CTA Section */}
       <div className="mt-16 text-center">
-        <h3 className="text-2xl font-bold mb-4">Ready to start tracking crypto?</h3>
-        <p className="text-muted-foreground mb-8">Join millions of users and take control of your crypto portfolio.</p>
+        <h3 className="text-2xl font-bold mb-4">
+          Ready to start tracking crypto?
+        </h3>
+        <p className="text-muted-foreground mb-8">
+          Join millions of users and take control of your crypto portfolio.
+        </p>
         <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 active:scale-95">
           Get Started Now
         </button>

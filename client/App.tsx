@@ -20,9 +20,7 @@ const queryClient = new QueryClient();
 const Layout = ({ children }: { children: React.ReactNode }) => (
   <div className="flex flex-col min-h-screen bg-background text-foreground">
     <Navbar />
-    <main className="flex-grow">
-      {children}
-    </main>
+    <main className="flex-grow">{children}</main>
     <Footer />
   </div>
 );
@@ -35,12 +33,47 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout><Home /></Layout>} />
-            <Route path="/market" element={<Layout><Market /></Layout>} />
-            <Route path="/wallet" element={<Layout><Wallet /></Layout>} />
-            <Route path="/about" element={<Layout><About /></Layout>} />
+            <Route
+              path="/"
+              element={
+                <Layout>
+                  <Home />
+                </Layout>
+              }
+            />
+            <Route
+              path="/market"
+              element={
+                <Layout>
+                  <Market />
+                </Layout>
+              }
+            />
+            <Route
+              path="/wallet"
+              element={
+                <Layout>
+                  <Wallet />
+                </Layout>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <Layout>
+                  <About />
+                </Layout>
+              }
+            />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<Layout><NotFound /></Layout>} />
+            <Route
+              path="*"
+              element={
+                <Layout>
+                  <NotFound />
+                </Layout>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

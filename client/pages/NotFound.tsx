@@ -22,16 +22,19 @@ const NotFound = () => {
           </h1>
           <p className="text-2xl font-semibold mb-4">Oops! Page not found</p>
           <p className="text-muted-foreground text-lg">
-            The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+            The page you're looking for doesn't exist or has been moved. Let's
+            get you back on track.
           </p>
         </div>
 
         <div className="glass p-12 rounded-2xl mb-8">
           <p className="text-muted-foreground mb-6">
-            Requested path: <code className="text-blue-400">{location.pathname}</code>
+            Requested path:{" "}
+            <code className="text-blue-400">{location.pathname}</code>
           </p>
           <p className="text-sm text-muted-foreground">
-            Need help? Check out our available pages or go back to the home page.
+            Need help? Check out our available pages or go back to the home
+            page.
           </p>
         </div>
 

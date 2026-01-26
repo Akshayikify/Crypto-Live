@@ -1,21 +1,21 @@
-import { Github, Mail, Twitter, Linkedin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Github, Mail, Twitter, Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
-    { label: 'Docs', href: '#' },
-    { label: 'Privacy', href: '#' },
-    { label: 'Terms', href: '#' },
-    { label: 'Status', href: '#' },
+    { label: "Docs", href: "#" },
+    { label: "Privacy", href: "#" },
+    { label: "Terms", href: "#" },
+    { label: "Status", href: "#" },
   ];
 
   const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Mail, href: '#', label: 'Email' },
+    { icon: Github, href: "#", label: "GitHub" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Mail, href: "#", label: "Email" },
   ];
 
   return (
@@ -45,9 +45,12 @@ const Footer = () => {
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2">
-                {['Features', 'Pricing', 'Security', 'Roadmap'].map((item) => (
+                {["Features", "Pricing", "Security", "Roadmap"].map((item) => (
                   <li key={item}>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <a
+                      href="#"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
                       {item}
                     </a>
                   </li>
@@ -59,9 +62,12 @@ const Footer = () => {
             <div>
               <h4 className="font-semibold mb-4">Resources</h4>
               <ul className="space-y-2">
-                {['Blog', 'Documentation', 'API', 'Support'].map((item) => (
+                {["Blog", "Documentation", "API", "Support"].map((item) => (
                   <li key={item}>
-                    <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <a
+                      href="#"
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
                       {item}
                     </a>
                   </li>
@@ -75,7 +81,10 @@ const Footer = () => {
               <ul className="space-y-2">
                 {footerLinks.map((link) => (
                   <li key={link.label}>
-                    <a href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
                       {link.label}
                     </a>
                   </li>
@@ -102,7 +111,10 @@ const Footer = () => {
                   aria-label={label}
                   className="p-2 rounded-lg hover:bg-white/10 dark:hover:bg-black/20 transition-smooth"
                 >
-                  <Icon size={18} className="text-muted-foreground hover:text-foreground transition-colors" />
+                  <Icon
+                    size={18}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  />
                 </a>
               ))}
             </div>
