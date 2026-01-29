@@ -11,8 +11,10 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Market from "./pages/Market";
+import CoinDetail from "./pages/CoinDetail";
 import Wallet from "./pages/Wallet";
 import About from "./pages/About";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -53,6 +55,14 @@ const App = () => (
               }
             />
             <Route
+              path="/market/:coinId"
+              element={
+                <Layout>
+                  <CoinDetail />
+                </Layout>
+              }
+            />
+            <Route
               path="/wallet"
               element={
                 <Layout>
@@ -65,6 +75,14 @@ const App = () => (
               element={
                 <Layout>
                   <About />
+                </Layout>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <Layout>
+                  <Profile />
                 </Layout>
               }
             />
