@@ -2,7 +2,13 @@ import { ArrowRight, TrendingUp } from "lucide-react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
+import { useNavigate } from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
+
 const HeroSection = () => {
+  const navigate = useNavigate();
+  const { isSignedIn } = useUser();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -47,6 +53,22 @@ const HeroSection = () => {
 
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
+
+
+  const handleExplore = () => {
+    if (isSignedIn) {
+      navigate("/market");
+    } else {
+      const marketSection = document.getElementById("market-snapshot");
+      if (marketSection) {
+        marketSection.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  const handleConnectWallet = () => {
+    navigate("/wallet");
+  };
 
   return (
     <section
@@ -103,7 +125,10 @@ const HeroSection = () => {
             ref={buttonsRef}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
-            <button className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 active:scale-95">
+            <button
+              onClick={handleExplore}
+              className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 active:scale-95"
+            >
               <span className="flex items-center gap-2">
                 Explore Market
                 <ArrowRight
@@ -112,7 +137,10 @@ const HeroSection = () => {
                 />
               </span>
             </button>
-            <button className="px-8 py-4 rounded-xl glass hover:bg-white/20 dark:hover:bg-black/30 font-semibold transition-smooth">
+            <button
+              onClick={handleConnectWallet}
+              className="px-8 py-4 rounded-xl glass hover:bg-white/20 dark:hover:bg-black/30 font-semibold transition-smooth"
+            >
               Connect Wallet
             </button>
           </div>

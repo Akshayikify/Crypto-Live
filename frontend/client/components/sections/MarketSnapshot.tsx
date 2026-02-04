@@ -128,7 +128,7 @@ const MarketSnapshot = () => {
   };
 
   return (
-    <section ref={containerRef} className="container mx-auto px-4 py-20">
+    <section id="market-snapshot" ref={containerRef} className="container mx-auto px-4 py-20">
       {/* Section Header */}
       <div className="flex items-center justify-center gap-3 mb-4">
         <TrendingUp className="text-blue-500" size={24} />

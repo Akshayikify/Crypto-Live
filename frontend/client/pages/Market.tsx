@@ -147,7 +147,7 @@ export default function Market() {
                     onClick={() => navigate(`/market/${coin.coin_id}`)}
                     className="hover:bg-white/5 transition-colors cursor-pointer group"
                   >
-                    <td className="px-6 py-4 text-sm text-muted-foreground">
+                    <td className="px-6 py-4 text-sm text-muted-foreground whitespace-nowrap">
                       {coin.market_cap_rank}
                     </td>
                     <td className="px-6 py-4">
