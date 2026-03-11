@@ -8,6 +8,7 @@ import { format } from "date-fns";
 import TradeModal from "@/components/TradeModal";
 import { useUser } from "@clerk/clerk-react";
 import { toast } from "sonner";
+import SentimentWidget from "@/components/SentimentWidget";
 
 interface CoinDetailData {
     coin_id: string;
@@ -220,6 +221,7 @@ export default function CoinDetail() {
                         </CardContent>
                     </Card>
                 </div>
+                <SentimentWidget coin={coin.coin_id} />
             </div>
 
             {coin && (
