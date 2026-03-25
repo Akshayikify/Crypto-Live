@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment files
+backend/.env 
+.env
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Build files
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
