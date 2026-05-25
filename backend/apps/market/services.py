@@ -1,9 +1,30 @@
+import os
 import requests
 from datetime import datetime
 from .models import Coin
 
 class CryptoService:
-    COINGECKO_API_URL = "https://api.coingecko.com/api/v3/coins/markets"
+    @staticmethod
+    def _get_api_config(path):
+        """
+        Returns (url, headers) based on whether COINGECKO_API_KEY is configured.
+        """
+        api_key = os.environ.get("COINGECKO_API_KEY")
+        path = path.lstrip('/')
+        url = f"https://api.coingecko.com/api/v3/{path}"
+        
+        if api_key:
+            headers = {
+                "x-cg-demo-api-key": api_key,
+                "Accept": "application/json",
+            }
+        else:
+            headers = {
+                "User-Agent": "CryptoLive/1.0 (https://github.com/your-repo)",
+                "Accept": "application/json",
+            }
+        return url, headers
+
     
     @staticmethod
     def fetch_market_data(currency="usd", per_page=100, page=1):
@@ -20,7 +41,8 @@ class CryptoService:
 
         try:
             print(f"Fetching data from CoinGecko page {page}...")
-            response = requests.get(CryptoService.COINGECKO_API_URL, params=params, timeout=10)
+            url, headers = CryptoService._get_api_config("coins/markets")
+            response = requests.get(url, params=params, headers=headers, timeout=10)
             
             if response.status_code == 200:
                 data = response.json()
@@ -75,17 +97,10 @@ class CryptoService:
         try:
             # Cast days to int — query params arrive as strings from Django
             days = int(days)
-            url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart"
+            url, headers = CryptoService._get_api_config(f"coins/{coin_id}/market_chart")
             params = {
                 "vs_currency": "usd",
                 "days": days
-            }
-
-            # User-Agent is required to avoid 429s on CoinGecko free tier
-            # (Render's shared IPs are often flagged without it)
-            headers = {
-                "User-Agent": "CryptoLive/1.0 (https://github.com/your-repo)",
-                "Accept": "application/json",
             }
 
             print(f"Fetching history for {coin_id} ({days} days)...")

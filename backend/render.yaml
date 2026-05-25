@@ -67,6 +67,13 @@ services:
       - key: NEWS_API_KEY
         sync: false
 
+      # ----------------------------------------------------------------
+      # CoinGecko API key for rate-limit bypass
+      # ----------------------------------------------------------------
+      - key: COINGECKO_API_KEY
+        sync: false
+
+
 # -----------------------------------------------------------------------
 # Optional: Render managed Redis (free tier)
 # Uncomment this block and replace `REDIS_URL.sync: false` above with:
