@@ -23,9 +23,10 @@ export function useMarketData() {
             setLoading(true);
             setError(null);
 
+            const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
             const url = refresh
-                ? "http://localhost:8000/api/market/coins/?refresh=true"
-                : "http://localhost:8000/api/market/coins/";
+                ? `${apiUrl}/api/market/coins/?refresh=true`
+                : `${apiUrl}/api/market/coins/`;
 
             const response = await fetch(url);
 

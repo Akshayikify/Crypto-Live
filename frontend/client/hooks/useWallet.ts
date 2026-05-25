@@ -28,7 +28,8 @@ export function useWallet() {
             const token = await getToken();
             if (!token) return;
 
-            const response = await fetch("http://localhost:8000/api/wallet/", {
+            const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+            const response = await fetch(`${apiUrl}/api/wallet/`, {
                 headers: { "Authorization": `Bearer ${token}` }
             });
 
@@ -47,7 +48,8 @@ export function useWallet() {
         const token = await getToken();
         if (!token) throw new Error("Not authenticated");
 
-        const response = await fetch("http://localhost:8000/api/wallet/trade/", {
+        const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+        const response = await fetch(`${apiUrl}/api/wallet/trade/`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,

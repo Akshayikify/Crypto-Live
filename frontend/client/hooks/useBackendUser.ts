@@ -27,7 +27,8 @@ export function useBackendUser() {
                 throw new Error("No authentication token available");
             }
 
-            const response = await fetch("http://localhost:8000/api/users/me/", {
+            const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+            const response = await fetch(`${apiUrl}/api/users/me/`, {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                     "Content-Type": "application/json",

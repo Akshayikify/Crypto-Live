@@ -1,0 +1,82 @@
+# render.yaml — Render Blueprint for CryptoLive Backend
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Deploy by connecting your GitHub repo to Render and selecting this file.
+# All env vars marked `sync: false` MUST be set manually in the Render dashboard.
+
+services:
+  - type: web
+    name: cryptolive-backend
+    runtime: python
+    rootDir: backend
+    plan: free                         # Change to "starter" for always-on
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate --run-syncdb
+      python manage.py collectstatic --noinput
+    startCommand: daphne -b 0.0.0.0 -p $PORT core.asgi:application
+    healthCheckPath: /api/market/coins/
+    envVars:
+      # ----------------------------------------------------------------
+      # Django core
+      # ----------------------------------------------------------------
+      - key: DJANGO_SETTINGS_MODULE
+        value: core.settings
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: DJANGO_SECRET_KEY
+        sync: false        # Set in Render dashboard → must be a long random string
+      - key: ALLOWED_HOSTS
+        sync: false        # e.g. cryptolive-backend.onrender.com
+
+      # ----------------------------------------------------------------
+      # Database
+      # ----------------------------------------------------------------
+      - key: MONGODB_URI
+        sync: false        # MongoDB Atlas connection string
+
+      # ----------------------------------------------------------------
+      # Redis — uncomment `fromService` block if using Render Redis below
+      # ----------------------------------------------------------------
+      - key: REDIS_URL
+        sync: false        # Paste your Redis URL here, OR use the block below
+
+      # ----------------------------------------------------------------
+      # CORS — set to "False" and specify your Vercel URL
+      # ----------------------------------------------------------------
+      - key: CORS_ALLOW_ALL_ORIGINS
+        value: "False"
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false        # e.g. https://cryptolive.vercel.app
+
+      # ----------------------------------------------------------------
+      # Clerk authentication
+      # ----------------------------------------------------------------
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+
+      # ----------------------------------------------------------------
+      # Sentiment analysis API keys
+      # ----------------------------------------------------------------
+      - key: HF_API_KEY
+        sync: false
+      - key: CRYPTOPANIC_API_KEY
+        sync: false
+      - key: NEWS_API_KEY
+        sync: false
+
+# -----------------------------------------------------------------------
+# Optional: Render managed Redis (free tier)
+# Uncomment this block and replace `REDIS_URL.sync: false` above with:
+#   - key: REDIS_URL
+#     fromService:
+#       name: cryptolive-redis
+#       type: redis
+#       property: connectionString
+# -----------------------------------------------------------------------
+#  - type: redis
+#    name: cryptolive-redis
+#    plan: free
+#    maxmemoryPolicy: allkeys-lru

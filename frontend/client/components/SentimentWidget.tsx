@@ -32,7 +32,8 @@ export default function SentimentWidget({ coin }: { coin: string }) {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:8000/api/sentiment/?coin=${coin.toUpperCase()}`)
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
+    fetch(`${apiUrl}/api/sentiment/?coin=${coin.toUpperCase()}`)
       .then((r) => r.json())
       .then((d) => { setData(d); setLoading(false); })
       .catch(() => setLoading(false));

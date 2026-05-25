@@ -15,6 +15,35 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     outDir: "dist/spa",
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // React core — changes rarely, benefits most from long-term caching
+          "vendor-react": ["react", "react-dom"],
+          // Routing
+          "vendor-router": ["react-router-dom"],
+          // Clerk auth SDK
+          "vendor-clerk": ["@clerk/clerk-react"],
+          // Charts
+          "vendor-recharts": ["recharts"],
+          // Three.js (heavy — isolate it)
+          "vendor-three": ["three", "@react-three/fiber", "@react-three/drei"],
+          // Radix UI components
+          "vendor-radix": [
+            "@radix-ui/react-dialog",
+            "@radix-ui/react-dropdown-menu",
+            "@radix-ui/react-tabs",
+            "@radix-ui/react-toast",
+            "@radix-ui/react-tooltip",
+            "@radix-ui/react-select",
+          ],
+          // Animation
+          "vendor-animation": ["framer-motion", "gsap", "lenis"],
+          // Data fetching
+          "vendor-query": ["@tanstack/react-query"],
+        },
+      },
+    },
   },
   plugins: [react(), expressPlugin()],
   resolve: {

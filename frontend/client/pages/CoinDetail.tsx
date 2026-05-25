@@ -46,14 +46,15 @@ export default function CoinDetail() {
             if (!coinId) return;
             setLoading(true);
             try {
+                const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
                 // Fetch Coin Details
-                const coinResponse = await fetch(`http://localhost:8000/api/market/coins/${coinId}/`);
+                const coinResponse = await fetch(`${apiUrl}/api/market/coins/${coinId}/`);
                 if (!coinResponse.ok) throw new Error("Coin not found");
                 const coinData = await coinResponse.json();
                 setCoin(coinData);
 
                 // Fetch History
-                const historyResponse = await fetch(`http://localhost:8000/api/market/coins/${coinId}/history/?days=${timeRange}`);
+                const historyResponse = await fetch(`${apiUrl}/api/market/coins/${coinId}/history/?days=${timeRange}`);
                 if (!historyResponse.ok) throw new Error("Failed to fetch history");
                 const historyData = await historyResponse.json();
                 setHistory(historyData);

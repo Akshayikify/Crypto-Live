@@ -89,7 +89,6 @@ export default function TradeModal({ isOpen, onClose, coinId, coinName, currentP
                                     value={quantity}
                                     onChange={(e) => setQuantity(e.target.value)}
                                     placeholder="0.00"
-                                    placeholder="0.00"
                                     className="font-mono text-black dark:text-white bg-white/50 dark:bg-black/50 border-white/20"
                                 />
                                 <Button variant="outline" onClick={setMax}>Max</Button>
