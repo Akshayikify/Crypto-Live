@@ -38,6 +38,8 @@ export default function CoinDetail() {
     const [history, setHistory] = useState<[number, number][]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [historyError, setHistoryError] = useState<string | null>(null);
+    const [historyLoading, setHistoryLoading] = useState(false);
     const [timeRange, setTimeRange] = useState(7); // Default 7 days
     const [isTradeModalOpen, setIsTradeModalOpen] = useState(false);
 
@@ -45,6 +47,7 @@ export default function CoinDetail() {
         const fetchData = async () => {
             if (!coinId) return;
             setLoading(true);
+            setHistoryError(null);
             try {
                 const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:8000";
                 // Fetch Coin Details
@@ -53,11 +56,24 @@ export default function CoinDetail() {
                 const coinData = await coinResponse.json();
                 setCoin(coinData);
 
-                // Fetch History
-                const historyResponse = await fetch(`${apiUrl}/api/market/coins/${coinId}/history/?days=${timeRange}`);
-                if (!historyResponse.ok) throw new Error("Failed to fetch history");
-                const historyData = await historyResponse.json();
-                setHistory(historyData);
+                // Fetch History (separate try/catch so a chart error doesn't kill the whole page)
+                try {
+                    setHistoryLoading(true);
+                    const historyResponse = await fetch(`${apiUrl}/api/market/coins/${coinId}/history/?days=${timeRange}`);
+                    const historyData = await historyResponse.json();
+                    if (!historyResponse.ok) {
+                        setHistoryError(historyData?.error || "Failed to load price history.");
+                        setHistory([]);
+                    } else {
+                        setHistory(historyData);
+                        setHistoryError(null);
+                    }
+                } catch {
+                    setHistoryError("Could not connect to price history service.");
+                    setHistory([]);
+                } finally {
+                    setHistoryLoading(false);
+                }
 
             } catch (err: any) {
                 setError(err.message);
@@ -150,48 +166,72 @@ export default function CoinDetail() {
                         </div>
                     </CardHeader>
                     <CardContent className="p-0 h-[400px]">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
-                                <defs>
-                                    <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor={isPositive ? "#22c55e" : "#ef4444"} stopOpacity={0.3} />
-                                        <stop offset="95%" stopColor={isPositive ? "#22c55e" : "#ef4444"} stopOpacity={0} />
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
-                                <XAxis
-                                    dataKey="formattedDate"
-                                    stroke="#666"
-                                    fontSize={12}
-                                    tickLine={false}
-                                    axisLine={false}
-                                    minTickGap={30}
-                                />
-                                <YAxis
-                                    stroke="#666"
-                                    fontSize={12}
-                                    tickLine={false}
-                                    axisLine={false}
-                                    domain={['auto', 'auto']}
-                                    tickFormatter={(val) => `$${val.toLocaleString()}`}
-                                />
-                                <Tooltip
-                                    contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }}
-                                    itemStyle={{ color: '#fff' }}
-                                    labelStyle={{ color: '#aaa', marginBottom: '0.5rem' }}
-                                    formatter={(value: number) => [formatCurrency(value), "Price"]}
-                                    labelFormatter={(label) => new Date(label).toLocaleString()}
-                                />
-                                <Area
-                                    type="monotone"
-                                    dataKey="price"
-                                    stroke={isPositive ? "#22c55e" : "#ef4444"}
-                                    strokeWidth={2}
-                                    fillOpacity={1}
-                                    fill="url(#colorPrice)"
-                                />
-                            </AreaChart>
-                        </ResponsiveContainer>
+                        {historyLoading ? (
+                            <div className="flex flex-col items-center justify-center h-full gap-3">
+                                <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full" />
+                                <p className="text-sm text-muted-foreground">Loading price history...</p>
+                            </div>
+                        ) : historyError ? (
+                            <div className="flex flex-col items-center justify-center h-full gap-3 px-6 text-center">
+                                <div className="text-4xl">📉</div>
+                                <p className="text-sm text-red-400 font-medium">{historyError}</p>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => setTimeRange(t => t)}
+                                    className="mt-2 text-xs"
+                                >
+                                    Retry
+                                </Button>
+                            </div>
+                        ) : chartData.length === 0 ? (
+                            <div className="flex items-center justify-center h-full">
+                                <p className="text-sm text-muted-foreground">No chart data available.</p>
+                            </div>
+                        ) : (
+                            <ResponsiveContainer width="100%" height="100%">
+                                <AreaChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 0 }}>
+                                    <defs>
+                                        <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor={isPositive ? "#22c55e" : "#ef4444"} stopOpacity={0.3} />
+                                            <stop offset="95%" stopColor={isPositive ? "#22c55e" : "#ef4444"} stopOpacity={0} />
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
+                                    <XAxis
+                                        dataKey="formattedDate"
+                                        stroke="#666"
+                                        fontSize={12}
+                                        tickLine={false}
+                                        axisLine={false}
+                                        minTickGap={30}
+                                    />
+                                    <YAxis
+                                        stroke="#666"
+                                        fontSize={12}
+                                        tickLine={false}
+                                        axisLine={false}
+                                        domain={['auto', 'auto']}
+                                        tickFormatter={(val) => `$${val.toLocaleString()}`}
+                                    />
+                                    <Tooltip
+                                        contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }}
+                                        itemStyle={{ color: '#fff' }}
+                                        labelStyle={{ color: '#aaa', marginBottom: '0.5rem' }}
+                                        formatter={(value: number) => [formatCurrency(value), "Price"]}
+                                        labelFormatter={(label) => new Date(label).toLocaleString()}
+                                    />
+                                    <Area
+                                        type="monotone"
+                                        dataKey="price"
+                                        stroke={isPositive ? "#22c55e" : "#ef4444"}
+                                        strokeWidth={2}
+                                        fillOpacity={1}
+                                        fill="url(#colorPrice)"
+                                    />
+                                </AreaChart>
+                            </ResponsiveContainer>
+                        )}
                     </CardContent>
                 </Card>
 

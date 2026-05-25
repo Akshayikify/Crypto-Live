@@ -58,4 +58,10 @@ class CoinHistoryView(APIView):
     def get(self, request, coin_id):
         days = request.query_params.get('days', 7)
         data = CryptoService.fetch_coin_history(coin_id, days)
+        if not data:
+            return Response(
+                {"error": f"Could not fetch price history for '{coin_id}'. CoinGecko may be rate-limiting. Please try again shortly."},
+                status=503
+            )
         return Response(data)
+

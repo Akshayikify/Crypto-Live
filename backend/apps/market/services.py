@@ -73,23 +73,40 @@ class CryptoService:
         Returns a list of [timestamp, price] points.
         """
         try:
+            # Cast days to int — query params arrive as strings from Django
+            days = int(days)
             url = f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart"
             params = {
                 "vs_currency": "usd",
                 "days": days
             }
-            
-            # Note: In production, cache this response in Redis!
-            print(f"Fetching history for {coin_id}...")
-            response = requests.get(url, params=params, timeout=10)
-            
+
+            # User-Agent is required to avoid 429s on CoinGecko free tier
+            # (Render's shared IPs are often flagged without it)
+            headers = {
+                "User-Agent": "CryptoLive/1.0 (https://github.com/your-repo)",
+                "Accept": "application/json",
+            }
+
+            print(f"Fetching history for {coin_id} ({days} days)...")
+            response = requests.get(url, params=params, headers=headers, timeout=15)
+
             if response.status_code == 200:
                 data = response.json()
                 # data['prices'] is already [[timestamp, price], ...]
-                return data.get('prices', [])
-            else:
-                print(f"Error fetching history: {response.status_code} - {response.text}")
+                prices = data.get('prices', [])
+                print(f"Got {len(prices)} price points for {coin_id}")
+                return prices
+            elif response.status_code == 429:
+                print(f"CoinGecko rate limit hit for {coin_id}. Retry after a moment.")
                 return []
+            else:
+                print(f"Error fetching history: {response.status_code} - {response.text[:200]}")
+                return []
+        except ValueError:
+            print(f"Invalid 'days' parameter: {days}")
+            return []
         except Exception as e:
-             print(f"Exception in fetch_coin_history: {str(e)}")
-             return []
+            print(f"Exception in fetch_coin_history: {str(e)}")
+            return []
+
